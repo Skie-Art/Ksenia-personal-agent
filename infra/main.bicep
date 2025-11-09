@@ -182,6 +182,8 @@ var resolvedSearchServiceName = !useSearchService
   ? ''
   : !empty(searchServiceName) ? searchServiceName : '${abbrs.searchSearchServices}${resourceToken}'
 
+var resolvedSearchConnectionName = !empty(searchConnectionName) ? searchConnectionName : 'searchConnection'
+
 
 module ai 'core/host/ai-environment.bicep' = if (empty(azureExistingAIProjectResourceId)) {
   name: 'ai'
@@ -205,9 +207,15 @@ module ai 'core/host/ai-environment.bicep' = if (empty(azureExistingAIProjectRes
   }
 }
 
+// Reference to existing search service when using existing AI project
+resource existingSearchService 'Microsoft.Search/searchServices@2024-06-01-preview' existing = if (!empty(azureExistingAIProjectResourceId) && useSearchService) {
+  name: resolvedSearchServiceName
+  scope: rg
+}
+
 var searchServiceEndpoint = !useSearchService
   ? ''
-  : empty(azureExistingAIProjectResourceId) ? ai!.outputs.searchServiceEndpoint : ''
+  : empty(azureExistingAIProjectResourceId) ? ai!.outputs.searchServiceEndpoint : 'https://${existingSearchService.name}.search.windows.net/'
 
 // If bringing an existing AI project, set up the log analytics workspace here
 module logAnalytics 'core/monitor/loganalytics.bicep' = if (!empty(azureExistingAIProjectResourceId)) {
@@ -287,7 +295,7 @@ module api 'api.bicep' = {
     azureExistingAIProjectResourceId: projectResourceId
     containerRegistryName: containerApps.outputs.registryName
     agentDeploymentName: agentDeploymentName
-    searchConnectionName: searchConnectionName
+    searchConnectionName: resolvedSearchConnectionName
     aiSearchIndexName: aiSearchIndexName
     searchServiceEndpoint: searchServiceEndpoint
     embeddingDeploymentName: embeddingDeploymentName
@@ -429,7 +437,7 @@ output AZURE_RESOURCE_GROUP string = rg.name
 output AZURE_TENANT_ID string = tenant().tenantId
 output AZURE_EXISTING_AIPROJECT_RESOURCE_ID string = projectResourceId
 output AZURE_AI_AGENT_DEPLOYMENT_NAME string = agentDeploymentName
-output AZURE_AI_SEARCH_CONNECTION_NAME string = searchConnectionName
+output AZURE_AI_SEARCH_CONNECTION_NAME string = resolvedSearchConnectionName
 output AZURE_AI_EMBED_DEPLOYMENT_NAME string = embeddingDeploymentName
 output AZURE_AI_SEARCH_INDEX_NAME string = aiSearchIndexName
 output AZURE_AI_SEARCH_ENDPOINT string = searchServiceEndpoint
