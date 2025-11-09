@@ -24,7 +24,9 @@
         "eastus2",
         "swedencentral",
         "westus",
-        "westus3"
+        "westus3",
+        "australiaeast",
+        "australiasoutheast"
       ],
       "metadata": {
         "azd": {
@@ -131,10 +133,7 @@
     "agentModelFormat": {
       "type": "string",
       "defaultValue": "OpenAI",
-      "allowedValues": [
-        "Microsoft",
-        "OpenAI"
-      ],
+      "allowedValues": ["Microsoft", "OpenAI"],
       "metadata": {
         "description": "Format of the chat model to deploy"
       }
@@ -198,10 +197,7 @@
     "embedModelFormat": {
       "type": "string",
       "defaultValue": "OpenAI",
-      "allowedValues": [
-        "Microsoft",
-        "OpenAI"
-      ],
+      "allowedValues": ["Microsoft", "OpenAI"],
       "metadata": {
         "description": "Format of the embedding model to deploy"
       }
@@ -849,12 +845,8 @@
                                   "PATCH"
                                 ],
                                 "maxAgeInSeconds": 1800,
-                                "exposedHeaders": [
-                                  "*"
-                                ],
-                                "allowedHeaders": [
-                                  "*"
-                                ]
+                                "exposedHeaders": ["*"],
+                                "allowedHeaders": ["*"]
                               }
                             ]
                           },
@@ -897,11 +889,7 @@
                             "accessTier": {
                               "type": "string",
                               "defaultValue": "Hot",
-                              "allowedValues": [
-                                "Cool",
-                                "Hot",
-                                "Premium"
-                              ]
+                              "allowedValues": ["Cool", "Hot", "Premium"]
                             },
                             "allowBlobPublicAccess": {
                               "type": "bool",
@@ -934,10 +922,7 @@
                             "dnsEndpointType": {
                               "type": "string",
                               "defaultValue": "Standard",
-                              "allowedValues": [
-                                "AzureDnsZone",
-                                "Standard"
-                              ]
+                              "allowedValues": ["AzureDnsZone", "Standard"]
                             },
                             "files": {
                               "type": "array",
@@ -977,10 +962,7 @@
                             "publicNetworkAccess": {
                               "type": "string",
                               "defaultValue": "Enabled",
-                              "allowedValues": [
-                                "Enabled",
-                                "Disabled"
-                              ]
+                              "allowedValues": ["Enabled", "Disabled"]
                             },
                             "sku": {
                               "type": "object",
@@ -1717,13 +1699,7 @@
                                                       "name": "CurrentFilter",
                                                       "value": {
                                                         "eventTypes": [
-                                                          4,
-                                                          1,
-                                                          3,
-                                                          5,
-                                                          2,
-                                                          6,
-                                                          13
+                                                          4, 1, 3, 5, 2, 6, 13
                                                         ],
                                                         "typeFacets": {},
                                                         "isPermissive": false
@@ -2612,10 +2588,7 @@
                             "publicNetworkAccess": {
                               "type": "string",
                               "defaultValue": "Enabled",
-                              "allowedValues": [
-                                "Enabled",
-                                "Disabled"
-                              ]
+                              "allowedValues": ["Enabled", "Disabled"]
                             },
                             "sku": {
                               "type": "object",
@@ -2770,10 +2743,7 @@
                             "hostingMode": {
                               "type": "string",
                               "defaultValue": "default",
-                              "allowedValues": [
-                                "default",
-                                "highDensity"
-                              ]
+                              "allowedValues": ["default", "highDensity"]
                             },
                             "networkRuleSet": {
                               "type": "object",
@@ -2789,10 +2759,7 @@
                             "publicNetworkAccess": {
                               "type": "string",
                               "defaultValue": "enabled",
-                              "allowedValues": [
-                                "enabled",
-                                "disabled"
-                              ]
+                              "allowedValues": ["enabled", "disabled"]
                             },
                             "replicaCount": {
                               "type": "int",
@@ -2801,11 +2768,7 @@
                             "semanticSearch": {
                               "type": "string",
                               "defaultValue": "disabled",
-                              "allowedValues": [
-                                "disabled",
-                                "free",
-                                "standard"
-                              ]
+                              "allowedValues": ["disabled", "free", "standard"]
                             }
                           },
                           "variables": {
@@ -3043,12 +3006,7 @@
                     "skuTier": {
                       "type": "string",
                       "defaultValue": "Basic",
-                      "allowedValues": [
-                        "Basic",
-                        "Free",
-                        "Premium",
-                        "Standard"
-                      ],
+                      "allowedValues": ["Basic", "Free", "Premium", "Standard"],
                       "metadata": {
                         "description": "The SKU tier to use for the AI Foundry Hub Resource"
                       }
@@ -3056,10 +3014,7 @@
                     "publicNetworkAccess": {
                       "type": "string",
                       "defaultValue": "Enabled",
-                      "allowedValues": [
-                        "Enabled",
-                        "Disabled"
-                      ],
+                      "allowedValues": ["Enabled", "Disabled"],
                       "metadata": {
                         "description": "The public network access setting to use for the AI Foundry Hub Resource"
                       }
@@ -3237,12 +3192,7 @@
                     "skuTier": {
                       "type": "string",
                       "defaultValue": "Basic",
-                      "allowedValues": [
-                        "Basic",
-                        "Free",
-                        "Premium",
-                        "Standard"
-                      ],
+                      "allowedValues": ["Basic", "Free", "Premium", "Standard"],
                       "metadata": {
                         "description": "The SKU tier to use for the AI Foundry Hub Resource"
                       }
@@ -3250,10 +3200,7 @@
                     "publicNetworkAccess": {
                       "type": "string",
                       "defaultValue": "Enabled",
-                      "allowedValues": [
-                        "Enabled",
-                        "Disabled"
-                      ],
+                      "allowedValues": ["Enabled", "Disabled"],
                       "metadata": {
                         "description": "The public network access setting to use for the AI Foundry Hub Resource"
                       }
@@ -3329,10 +3276,7 @@
                             "permissions": {
                               "type": "object",
                               "defaultValue": {
-                                "secrets": [
-                                  "get",
-                                  "list"
-                                ]
+                                "secrets": ["get", "list"]
                               }
                             },
                             "principalId": {
@@ -4259,10 +4203,7 @@
                     "daprAppProtocol": {
                       "type": "string",
                       "defaultValue": "http",
-                      "allowedValues": [
-                        "http",
-                        "grpc"
-                      ],
+                      "allowedValues": ["http", "grpc"],
                       "metadata": {
                         "description": "The protocol used by Dapr to connect to the app, e.g., HTTP or gRPC"
                       }
@@ -4496,10 +4437,7 @@
                             "daprAppProtocol": {
                               "type": "string",
                               "defaultValue": "http",
-                              "allowedValues": [
-                                "http",
-                                "grpc"
-                              ],
+                              "allowedValues": ["http", "grpc"],
                               "metadata": {
                                 "description": "The protocol used by Dapr to connect to the app, e.g., http or grpc"
                               }

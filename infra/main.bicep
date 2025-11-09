@@ -6,11 +6,12 @@ targetScope = 'subscription'
 param environmentName string
 
 @description('Location for all resources')
-// Based on the model, creating an agent is not supported in all regions. 
+// Based on the model, creating an agent is not supported in all regions.
 // The combination of allowed and usageName below is for AZD to check AI model gpt-4o-mini quota only for the allowed regions for creating an agent.
 // If using different models, update the SKU,capacity depending on the model you use.
 // https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support
 @allowed([
+  'australiaeast'
   'eastus'
   'eastus2'
   'swedencentral'
@@ -20,9 +21,9 @@ param environmentName string
 @metadata({
   azd: {
     type: 'location'
-    // quota-validation for ai models: gpt-4o-mini
+    // quota-validation for ai models: gpt-5-mini
     usageName: [
-      'OpenAI.GlobalStandard.gpt-4o-mini,80'
+      'OpenAI.GlobalStandard.gpt-5-mini,450'
     ]
   }
 })
@@ -69,7 +70,7 @@ param agentDeploymentName string = 'gpt-5-mini'
 @description('Version of the chat model to deploy')
 // See version availability in this table:
 // https://learn.microsoft.com/azure/ai-services/openai/concepts/models#global-standard-model-availability
-param agentModelVersion string = '2024-07-18'
+param agentModelVersion string = '2025-08-07'
 
 @description('Sku of the chat deployment')
 param agentDeploymentSku string = 'GlobalStandard'
@@ -77,7 +78,7 @@ param agentDeploymentSku string = 'GlobalStandard'
 @description('Capacity of the chat deployment')
 // You can increase this, but capacity is limited per model/region, so you will get errors if you go over
 // https://learn.microsoft.com/en-us/azure/ai-services/openai/quotas-limits
-param agentDeploymentCapacity int = 30
+param agentDeploymentCapacity int = 150
 
 // Embedding model
 @description('Format of the embedding model to deploy')
@@ -106,13 +107,13 @@ param embedDeploymentCapacity int = 30
 
 param useApplicationInsights bool = true
 @description('Do we want to use the Azure AI Search')
-param useSearchService bool = false
+param useSearchService bool = true
 
 @description('Do we want to use the Azure Monitor tracing')
-param enableAzureMonitorTracing bool = false
+param enableAzureMonitorTracing bool = true
 
 @description('Do we want to use the Azure Monitor tracing for GenAI content recording')
-param azureTracingGenAIContentRecordingEnabled bool = false
+param azureTracingGenAIContentRecordingEnabled bool = true
 
 param templateValidationMode bool = false
 
@@ -144,7 +145,7 @@ var aiChatModel = [
     }
   }
 ]
-var aiEmbeddingModel = [ 
+var aiEmbeddingModel = [
   {
     name: embeddingDeploymentName
     model: {
@@ -180,7 +181,7 @@ var logAnalyticsWorkspaceResolvedName = !useApplicationInsights
 var resolvedSearchServiceName = !useSearchService
   ? ''
   : !empty(searchServiceName) ? searchServiceName : '${abbrs.searchSearchServices}${resourceToken}'
-  
+
 
 module ai 'core/host/ai-environment.bicep' = if (empty(azureExistingAIProjectResourceId)) {
   name: 'ai'
@@ -252,7 +253,7 @@ module userRoleAzureAIDeveloperBackendExistingProjectRG 'core/security/role.bice
   params: {
     principalType: 'ServicePrincipal'
     principalId: api.outputs.SERVICE_API_IDENTITY_PRINCIPAL_ID
-    roleDefinitionId: '64702f94-c441-49e6-a78b-ef80e0188fee' 
+    roleDefinitionId: '64702f94-c441-49e6-a78b-ef80e0188fee'
   }
 }
 

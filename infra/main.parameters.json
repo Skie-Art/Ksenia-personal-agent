@@ -48,7 +48,7 @@
       "value": "${USE_APPLICATION_INSIGHTS=true}"
     },
     "useSearchService": {
-      "value": "${USE_AZURE_AI_SEARCH_SERVICE=false}"
+      "value": "${USE_AZURE_AI_SEARCH_SERVICE=true}"
     },
     "agentName": {
       "value": "${AZURE_AI_AGENT_NAME=agent-template-assistant}"
@@ -69,13 +69,13 @@
       "value": "${AZURE_AI_AGENT_MODEL_NAME=gpt-5-mini}"
     },
     "agentModelVersion": {
-      "value": "${AZURE_AI_AGENT_MODEL_VERSION=2024-07-18}"
+      "value": "${AZURE_AI_AGENT_MODEL_VERSION=2025-08-07}"
     },
     "agentDeploymentSku": {
       "value": "${AZURE_AI_AGENT_DEPLOYMENT_SKU=GlobalStandard}"
     },
     "agentDeploymentCapacity": {
-      "value": "${AZURE_AI_AGENT_DEPLOYMENT_CAPACITY=80}"
+      "value": "${AZURE_AI_AGENT_DEPLOYMENT_CAPACITY=150}"
     },
     "embeddingDeploymentName": {
       "value": "${AZURE_AI_EMBED_DEPLOYMENT_NAME=text-embedding-3-small}"
