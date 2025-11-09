@@ -120,7 +120,7 @@ param templateValidationMode bool = false
 @description('Random seed to be used during generation of new resources suffixes.')
 param seed string = newGuid()
 
-var runnerPrincipalType = templateValidationMode? 'ServicePrincipal' : 'User'
+var runnerPrincipalType = templateValidationMode? 'User' : 'ServicePrincipal'
 
 var abbrs = loadJsonContent('./abbreviations.json')
 
