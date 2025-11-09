@@ -21,6 +21,7 @@ param projectEndpoint string
 resource apiIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
   name: identityName
   location: location
+  tags: {}
 }
 
 var env = [
